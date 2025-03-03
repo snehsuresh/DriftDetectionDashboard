@@ -6,6 +6,10 @@ from evidently.metric_preset import DataDriftPreset, RegressionPreset
 from evidently.metrics import ColumnDriftMetric
 from sklearn.metrics import mean_squared_error
 from sklearn.inspection import permutation_importance
+import logging
+
+# Configure logging.
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 def load_data():
     ref = pd.read_csv('reference_data.csv', parse_dates=['date'])
@@ -14,6 +18,7 @@ def load_data():
 
 def add_predictions(df, model):
     X = df[['feature1', 'feature2']]
+    df = df.copy()
     df['prediction'] = model.predict(X)
     return df
 
@@ -27,7 +32,7 @@ def generate_evidently_report(ref, curr):
     
     report.run(reference_data=ref, current_data=curr)
     report.save_html('evidently_report.html')
-    print("Evidently report saved to evidently_report.html")
+    logging.info("Evidently report saved to 'evidently_report.html'.")
 
 def compute_feature_importance_drift(model, ref, curr):
     X_ref = ref[['feature1', 'feature2']]
@@ -52,9 +57,9 @@ def compute_feature_importance_drift(model, ref, curr):
     plt.legend()
     plt.tight_layout()
     plt.savefig('feature_importance_drift.png')
-    print("Feature importance drift plot saved to feature_importance_drift.png")
+    logging.info("Feature importance drift plot saved to 'feature_importance_drift.png'.")
 
-if __name__ == "__main__":
+def main():
     ref, curr = load_data()
     model = joblib.load('model.pkl')
     
@@ -67,10 +72,13 @@ if __name__ == "__main__":
     mse_ref = mean_squared_error(ref['target'], ref['prediction'])
     mse_curr = mean_squared_error(curr['target'], curr['prediction'])
     
-    print(f"Reference MSE: {mse_ref:.2f}")
-    print(f"Current MSE: {mse_curr:.2f}")
+    logging.info(f"Reference MSE: {mse_ref:.2f}")
+    logging.info(f"Current MSE: {mse_curr:.2f}")
     
     if mse_curr > 1.5 * mse_ref:
-        print("ALERT: Performance degradation detected!")
+        logging.error("ALERT: Performance degradation detected!")
     else:
-        print("Model performance is stable.")
+        logging.info("Model performance is stable.")
+
+if __name__ == "__main__":
+    main()
