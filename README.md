@@ -37,7 +37,7 @@ We use **Streamlit** for the frontend and **Evidently AI** for drift detection. 
 ### Clone this repository
 
 ```bash
-git clone https://github.com/your-username/ModelMonitoringDashboard.git
+git clone https://github.com/snehsuresh/ModelMonitoringDashboard.git
 cd ModelMonitoringDashboard
 ```
 
@@ -140,15 +140,4 @@ If drift or degradation is detected, you can trigger retraining **directly from 
 
 MIT License
 
----
-
-## 👤 Author
-
-**Sneh Pillai**  
-
----
-
-## ⭐️ Contributions
-
-Feel free to open issues and pull requests for improvements.
 
