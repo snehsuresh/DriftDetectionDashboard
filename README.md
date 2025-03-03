@@ -3,9 +3,9 @@
 
 This project is an **end-to-end Model Monitoring Dashboard** that tracks performance degradation, detects drift (concept & covariate drift), and allows you to retrain models directly from the UI.
 
-Watch the dashboard in action:
+### Watch the Dashboard in Action
 
-[![Dashboard Demo](https://img.shields.io/badge/Watch-Dashboard%20Demo-blue)](./demo/demo.gif)
+![Dashboard Demo](./demo/demo.gif)
 
 Note: The data used in this project is synthetically generated for demonstration purposes. Therefore, the performance metrics (MSE, R²) may not reflect realistic model performance and should not be interpreted as indicators of actual predictive power. The goal of this project is to demonstrate the monitoring and drift detection workflow, not model accuracy.
 
