@@ -14,7 +14,7 @@ def load_data(filename, parse_dates=['date']):
     return pd.read_csv(filename, parse_dates=parse_dates)
 
 def add_predictions(df, model):
-    # If there is no data, skip predictions.
+    # If there is no data, skip predictions
     if df.empty:
         return df
     X = df[['feature1', 'feature2']]
